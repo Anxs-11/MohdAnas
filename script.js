@@ -379,3 +379,126 @@ const submitBtn  = document.getElementById('submit-btn');
   `;
   document.head.appendChild(style);
 })();
+
+/* ─────────────────────────────────────────────
+   10. PROJECT MODAL
+   Full problem / solution / impact breakdown
+───────────────────────────────────────────── */
+const PROJECT_DATA = {
+  'ticket-deflection': {
+    icon: 'fa-ticket',
+    title: 'AI Ticket Deflection System',
+    problem: 'Engineering teams were overwhelmed by high support ticket volume, with most requests being repetitive and resolvable without human intervention — but no automated triage or resolution layer existed.',
+    solution: [
+      'Built an LLM-powered classification layer using LangChain and embeddings to route tickets into self-service vs. admin-required buckets automatically',
+      'Integrated MCP workflows to resolve common requests in-place and deliver AI-generated answers directly in Slack without creating a ticket',
+      'Implemented duplicate detection to collapse redundant submissions before they reached the engineering queue',
+    ],
+    impact: ['40% support volume automated', '15+ engineering hours saved/week', 'Duplicate tickets eliminated'],
+    tech: ['LangChain', 'MCP', 'Python', 'Slack API', 'Embeddings', 'FastAPI'],
+  },
+  'text-to-sql': {
+    icon: 'fa-code',
+    title: 'Text-to-SQL Engine',
+    problem: 'Analysts needed to query complex multi-table databases without SQL expertise. Baseline LLM prompts were expensive, token-heavy, and inaccurate on joins across large schemas.',
+    solution: [
+      'Designed a schema chunking strategy that feeds only contextually relevant table definitions to the LLM, eliminating noise from full schema dumps',
+      'Engineered prompt templates with few-shot examples tuned specifically for complex join patterns and aggregation queries',
+      'Added a post-generation validation layer that checks SQL syntax and retries with corrected context on failure',
+    ],
+    impact: ['35% reduction in LLM token consumption', 'Higher accuracy on multi-table joins', 'Self-serve data access for non-technical stakeholders'],
+    tech: ['Python', 'LLM', 'SQL', 'Prompt Engineering', 'FastAPI'],
+  },
+  'ai-agents': {
+    icon: 'fa-robot',
+    title: 'Autonomous Enterprise AI Agents',
+    problem: 'Operations like Jira ticket creation, Confluence page updates, and approval workflows required constant context switching between tools, fragmenting focus and slowing execution.',
+    solution: [
+      'Built autonomous agents integrated with Jira and Confluence REST APIs via LangChain tool-calling, handling multi-step workflows from a single input',
+      'Deployed agent interfaces directly inside Slack and Microsoft Teams so users interact in natural language with zero app switching',
+      'Implemented intent detection and parameter extraction to support chained operations like "create a Jira ticket and link the Confluence spec"',
+    ],
+    impact: ['Natural language enterprise operations', 'Jira + Confluence fully automated', 'Zero context switching for users'],
+    tech: ['LangChain', 'Jira API', 'Confluence API', 'MS Teams', 'Slack', 'FastAPI', 'Python'],
+  },
+  'cicd-monitoring': {
+    icon: 'fa-pipe-section',
+    title: 'Enterprise CI/CD & Monitoring',
+    problem: 'Token renewals, API synchronization, and stale-data detection were handled manually, consuming 6+ engineering hours per week with no systematic health reporting or audit trail.',
+    solution: [
+      'Automated token renewal and API sync via Jenkins pipelines on scheduled triggers, replacing all manual intervention',
+      'Built a daily Playwright test suite covering critical user flows with results persisted to a database for trend analysis and alerting',
+      'Productionized GitHub Actions image creation pipelines ensuring 99.9% environment consistency across all developer setups',
+    ],
+    impact: ['6+ hrs/week of manual ops eliminated', '99.9% environment consistency', 'Automated daily health reports'],
+    tech: ['Jenkins', 'Playwright', 'GitHub Actions', 'Python', 'CI/CD'],
+  },
+  'workload-sync': {
+    icon: 'fa-arrows-rotate',
+    title: 'Tempo Workload Sync Engine',
+    problem: 'Workload schemas were manually synchronized with LOA source data, causing data drift, duplicate entries, and zero audit visibility for enterprise resource tracking.',
+    solution: [
+      'Built a backend service that automatically polls and synchronizes workload schemas with LOA data on a configurable schedule',
+      'Implemented duplicate detection logic with configurable deduplication rules to prevent redundant entries silently accumulating',
+      'Added per-sync rollback capability and daily audit trail logging for compliance, debugging, and executive reporting',
+    ],
+    impact: ['100% data accuracy achieved', 'Automatic rollback on sync failures', 'Full daily audit trail for compliance'],
+    tech: ['Python', 'MongoDB', 'REST API', 'Audit Logs'],
+  },
+  'provisioning': {
+    icon: 'fa-bolt',
+    title: 'Backend Provisioning Optimizer',
+    problem: 'Cloud environment provisioning used a fully sequential execution model — each step blocked the next, resulting in 60-second setup times that slowed down the entire development cycle.',
+    solution: [
+      'Re-architected provisioning workflows with task isolation, identifying all independent steps and grouping them for parallel execution',
+      'Replaced blocking sequential calls with async execution using Python asyncio and the Azure SDK',
+      'Added per-task health checks and retry logic so isolated failures do not cascade and block the full provisioning chain',
+    ],
+    impact: ['75% faster provisioning (60s → 15s)', 'Parallel non-blocking execution', 'Resilient per-step retry logic'],
+    tech: ['Python', 'Azure', 'Asyncio', 'System Design'],
+  },
+};
+
+(function initProjectModal() {
+  const overlay = document.getElementById('project-modal');
+  const closeBtn = document.getElementById('modal-close');
+  if (!overlay) return;
+
+  function openModal(projectKey) {
+    const data = PROJECT_DATA[projectKey];
+    if (!data) return;
+
+    document.getElementById('modal-icon').className = `fa-solid ${data.icon}`;
+    document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-problem').textContent = data.problem;
+
+    const solEl = document.getElementById('modal-solution');
+    solEl.innerHTML = data.solution.map(s => `<li>${s}</li>`).join('');
+
+    const impEl = document.getElementById('modal-impact');
+    impEl.innerHTML = data.impact.map(i => `<span class="impact-badge">${i}</span>`).join('');
+
+    const techEl = document.getElementById('modal-tech');
+    techEl.innerHTML = data.tech.map(t => `<span class="tag">${t}</span>`).join('');
+
+    overlay.removeAttribute('hidden');
+    requestAnimationFrame(() => overlay.classList.add('open'));
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    setTimeout(() => {
+      overlay.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+    }, 400);
+  }
+
+  document.querySelectorAll('.btn--details').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.getAttribute('data-project')));
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
