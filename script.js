@@ -387,6 +387,7 @@ const submitBtn  = document.getElementById('submit-btn');
 const PROJECT_DATA = {
   'ticket-deflection': {
     icon: 'fa-ticket',
+    internal: true,
     title: 'AI Ticket Deflection System',
     problem: 'Engineering teams were overwhelmed by high support ticket volume, with most requests being repetitive and resolvable without human intervention — but no automated triage or resolution layer existed.',
     solution: [
@@ -399,6 +400,7 @@ const PROJECT_DATA = {
   },
   'text-to-sql': {
     icon: 'fa-code',
+    internal: true,
     title: 'Text-to-SQL Engine',
     problem: 'Analysts needed to query complex multi-table databases without SQL expertise. Baseline LLM prompts were expensive, token-heavy, and inaccurate on joins across large schemas.',
     solution: [
@@ -411,6 +413,7 @@ const PROJECT_DATA = {
   },
   'ai-agents': {
     icon: 'fa-robot',
+    internal: true,
     title: 'Autonomous Enterprise AI Agents',
     problem: 'Operations like Jira ticket creation, Confluence page updates, and approval workflows required constant context switching between tools, fragmenting focus and slowing execution.',
     solution: [
@@ -422,7 +425,8 @@ const PROJECT_DATA = {
     tech: ['LangChain', 'Jira API', 'Confluence API', 'MS Teams', 'Slack', 'FastAPI', 'Python'],
   },
   'cicd-monitoring': {
-    icon: 'fa-pipe-section',
+    icon: 'fa-code-branch',
+    internal: true,
     title: 'Enterprise CI/CD & Monitoring',
     problem: 'Token renewals, API synchronization, and stale-data detection were handled manually, consuming 6+ engineering hours per week with no systematic health reporting or audit trail.',
     solution: [
@@ -435,6 +439,7 @@ const PROJECT_DATA = {
   },
   'workload-sync': {
     icon: 'fa-arrows-rotate',
+    internal: true,
     title: 'Tempo Workload Sync Engine',
     problem: 'Workload schemas were manually synchronized with LOA source data, causing data drift, duplicate entries, and zero audit visibility for enterprise resource tracking.',
     solution: [
@@ -447,6 +452,7 @@ const PROJECT_DATA = {
   },
   'provisioning': {
     icon: 'fa-bolt',
+    internal: true,
     title: 'Backend Provisioning Optimizer',
     problem: 'Cloud environment provisioning used a fully sequential execution model — each step blocked the next, resulting in 60-second setup times that slowed down the entire development cycle.',
     solution: [
@@ -456,6 +462,30 @@ const PROJECT_DATA = {
     ],
     impact: ['75% faster provisioning (60s → 15s)', 'Parallel non-blocking execution', 'Resilient per-step retry logic'],
     tech: ['Python', 'Azure', 'Asyncio', 'System Design'],
+  },
+  'yariga': {
+    icon: 'fa-house-chimney',
+    title: 'Skyline Home — Real Estate Marketplace',
+    problem: 'Property search experiences are fragmented across multiple platforms with no unified tool for buyers and sellers to discover listings, communicate, and manage inquiries end-to-end.',
+    solution: [
+      'Built a full-stack marketplace with React frontend and a Node.js/Express REST API backend, supporting paginated property listings with multi-filter search (price, location, type, size)',
+      'Implemented role-based authentication with separate buyer and seller dashboards — sellers manage their listings, buyers track saved properties and contact requests',
+      'Designed a scalable contact management workflow so buyer inquiries route directly to listing owners with proper ownership validation',
+    ],
+    impact: ['Fully live deployed product', 'End-to-end buyer & seller workflows', 'Multi-filter property search'],
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'REST API', 'Auth'],
+  },
+  'missing-persons': {
+    icon: 'fa-magnifying-glass',
+    title: 'Unidentified Persons Portal — AIIMS Jammu',
+    problem: 'AIIMS Jammu had no digital system for families and authorities to search for unidentified individuals — all matching was done manually against physical records, creating significant delays in identification.',
+    solution: [
+      'Built a public-facing search portal with compound multi-parameter queries — age range, height, hair color, location, and date of recovery — returning ranked matches from the database',
+      'Developed a secure admin dashboard for hospital staff to upload, verify, and manage records with access controls preventing unauthorized modifications',
+      'Optimized backend queries with indexing strategies for fast retrieval even as the record set grows, and built a fully mobile-responsive UI for accessibility in low-bandwidth environments',
+    ],
+    impact: ['Live institutional deployment', 'Real social impact for families', 'Mobile-responsive for field use'],
+    tech: ['React', 'Node.js', 'MongoDB', 'REST API', 'Admin Dashboard'],
   },
 };
 
@@ -470,6 +500,7 @@ const PROJECT_DATA = {
 
     document.getElementById('modal-icon').className = `fa-solid ${data.icon}`;
     document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-badge').style.display = data.internal ? '' : 'none';
     document.getElementById('modal-problem').textContent = data.problem;
 
     const solEl = document.getElementById('modal-solution');
