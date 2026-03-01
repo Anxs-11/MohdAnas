@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohd Anas — Backend & AI Engineer</title>
+  <meta name="description" content="Backend & AI Automation Engineer building scalable systems and LLM-powered workflows." />
+
+  <!-- Google Fonts: Syne (display) + DM Mono (code/accent) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo" aria-label="Mohd Anas - home">
+        <span class="nav__logo-bracket">[</span>MA<span class="nav__logo-bracket">]</span>
+      </a>
+
+      <!-- Desktop nav links -->
+      <ul class="nav__links" role="list">
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#skills" class="nav__link">Skills</a></li>
+        <li><a href="#experience" class="nav__link">Experience</a></li>
+        <li><a href="#projects" class="nav__link">Projects</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+      </ul>
+
+      <!-- Hamburger for mobile -->
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="#about" class="nav__mobile-link">About</a></li>
+        <li><a href="#skills" class="nav__mobile-link">Skills</a></li>
+        <li><a href="#experience" class="nav__mobile-link">Experience</a></li>
+        <li><a href="#projects" class="nav__mobile-link">Projects</a></li>
+        <li><a href="#contact" class="nav__mobile-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="hero" aria-label="Hero">
+      <!-- Decorative grid background -->
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__noise" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <div class="hero__tag reveal-up">
+          <span class="dot"></span>
+          <span class="dm-mono">Available for opportunities</span>
+        </div>
+
+        <h1 class="hero__name reveal-up delay-1">
+          Mohd<br /><span class="accent">Anas</span>
+        </h1>
+
+        <p class="hero__role reveal-up delay-2">
+          <span class="dm-mono typed" id="typed-role"></span>
+          <span class="cursor" aria-hidden="true">|</span>
+        </p>
+
+        <p class="hero__tagline reveal-up delay-3">
+          Building scalable backend systems &amp; LLM-powered workflows<br class="break-md" />
+          that automate operations and reduce enterprise costs.
+        </p>
+
+        <div class="hero__cta reveal-up delay-4">
+          <a href="#experience" class="btn btn--primary">
+            View Experience <i class="fa-solid fa-arrow-down-right" aria-hidden="true"></i>
+          </a>
+          <a href="#contact" class="btn btn--outline">
+            Contact Me <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="hero__stats reveal-up delay-5">
+          <div class="stat">
+            <span class="stat__num accent">2+</span>
+            <span class="stat__label dm-mono">Years Exp.</span>
+          </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat__num accent">95%</span>
+            <span class="stat__label dm-mono">Latency Reduced</span>
+          </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat__num accent">40%</span>
+            <span class="stat__label dm-mono">Support Automated</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating code snippet decoration -->
+      <div class="hero__code-card" aria-hidden="true">
+        <div class="code-card__header">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+          <span class="code-card__filename dm-mono">ai_agent.py</span>
+        </div>
+        <pre class="code-card__body dm-mono"><code><span class="c-purple">class</span> <span class="c-teal">AIAgent</span>:
+  <span class="c-purple">def</span> <span class="c-accent">__init__</span>(self, llm, tools):
+    self.llm  = llm
+    self.tools = tools
+
+  <span class="c-purple">async def</span> <span class="c-accent">execute</span>(self, task):
+    <span class="c-comment"># Classify → Route → Resolve</span>
+    intent = <span class="c-purple">await</span> self.llm.classify(task)
+    <span class="c-purple">return await</span> self.tools[intent].run()</code></pre>
+      </div>
+
+      <div class="hero__scroll" aria-label="Scroll down">
+        <span class="dm-mono">scroll</span>
+        <div class="hero__scroll-line" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section class="section about" id="about" aria-label="About me">
+      <div class="container">
+        <div class="section-label reveal-up">
+          <span class="dm-mono accent">01 /</span> About
+        </div>
+
+        <div class="about__grid">
+
+          <!-- Photo column -->
+          <div class="about__photo-col reveal-up delay-1">
+            <div class="about__photo-wrap">
+              <div class="about__photo-glow" aria-hidden="true"></div>
+              <img
+                src="profile.jpg"
+                alt="Mohd Anas — Backend & AI Engineer"
+                class="about__photo"
+                loading="lazy"
+              />
+              <div class="about__photo-badge">
+                <span class="dot"></span>
+                <span class="dm-mono">Open to work</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about__text reveal-up delay-2">
+            <h2 class="section__title">Building systems that<br /><span class="accent">think for themselves.</span></h2>
+            <p>I'm a Backend & AI Automation Engineer who graduated from IIT Jammu (CGPA 8.39) and now works at Teradata, where I architect AI-driven workflows that replace manual enterprise operations with natural language commands.</p>
+            <p>My work sits at the intersection of robust distributed systems and modern LLM tooling — engineering RAG-based services, agentic pipelines, and intelligent automation layers that convert enterprise friction into natural language-driven workflows.</p>
+            <p>I care about systems that are fast, reliable, and intelligent — not just functional.</p>
+
+            <div class="about__links">
+              <a href="mailto:mohdanas9595@gmail.com" class="btn btn--ghost" aria-label="Email Mohd Anas">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i> mohdanas9595@gmail.com
+              </a>
+              <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" aria-label="GitHub profile">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> github.com/Anxs-11
+              </a>
+            </div>
+          </div>
+
+          </div><!-- end about__text -->
+
+          <div class="about__highlights reveal-up delay-3">
+            <div class="highlight-card">
+              <i class="fa-solid fa-brain highlight-card__icon" aria-hidden="true"></i>
+              <h3>AI & LLM Systems</h3>
+              <p>RAG pipelines, LangChain agents, MCP workflows, semantic search, and Text-to-SQL engines.</p>
+            </div>
+            <div class="highlight-card">
+              <i class="fa-solid fa-server highlight-card__icon" aria-hidden="true"></i>
+              <h3>Backend Engineering</h3>
+              <p>FastAPI, Node.js/Express, REST APIs, async task processing, and distributed system design.</p>
+            </div>
+            <div class="highlight-card">
+              <i class="fa-solid fa-gears highlight-card__icon" aria-hidden="true"></i>
+              <h3>DevOps & Automation</h3>
+              <p>CI/CD pipelines, GitHub Actions, Jenkins, Playwright testing, and cloud infrastructure automation.</p>
+            </div>
+            <div class="highlight-card">
+              <i class="fa-solid fa-database highlight-card__icon" aria-hidden="true"></i>
+              <h3>Data & Databases</h3>
+              <p>MongoDB, MySQL, Redis caching, query optimization, and delta-update processing patterns.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SKILLS SECTION ========== -->
+    <section class="section skills" id="skills" aria-label="Skills">
+      <div class="container">
+        <div class="section-label reveal-up">
+          <span class="dm-mono accent">02 /</span> Skills
+        </div>
+        <h2 class="section__title reveal-up delay-1">Technical <span class="accent">Stack</span></h2>
+
+        <div class="skills__categories">
+
+          <!-- AI & Orchestration -->
+          <div class="skill-group reveal-up delay-1">
+            <h3 class="skill-group__title">
+              <i class="fa-solid fa-microchip" aria-hidden="true"></i> AI & Orchestration
+            </h3>
+            <div class="skill-tags">
+              <span class="tag">LangChain</span>
+              <span class="tag">RAG</span>
+              <span class="tag">MCP</span>
+              <span class="tag">LLMs</span>
+              <span class="tag">Flowise</span>
+              <span class="tag">Semantic Search</span>
+              <span class="tag">Embeddings</span>
+              <span class="tag">Prompt Engineering</span>
+            </div>
+            <div class="skill-bars">
+              <div class="skill-bar-item">
+                <span class="skill-bar-item__label dm-mono">LangChain / Agents</span>
+                <div class="skill-bar-item__track" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="LangChain proficiency">
+                  <div class="skill-bar-item__fill" data-width="92"></div>
+                </div>
+                <span class="skill-bar-item__pct dm-mono">92%</span>
+              </div>
+              <div class="skill-bar-item">
+                <span class="skill-bar-item__label dm-mono">RAG Pipelines</span>
+                <div class="skill-bar-item__track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="RAG proficiency">
+                  <div class="skill-bar-item__fill" data-width="88"></div>
+                </div>
+                <span class="skill-bar-item__pct dm-mono">88%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backend & APIs -->
+          <div class="skill-group reveal-up delay-2">
+            <h3 class="skill-group__title">
+              <i class="fa-solid fa-server" aria-hidden="true"></i> Backend & APIs
+            </h3>
+            <div class="skill-tags">
+              <span class="tag">Python</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">REST APIs</span>
+              <span class="tag">System Design</span>
+            </div>
+            <div class="skill-bars">
+              <div class="skill-bar-item">
+                <span class="skill-bar-item__label dm-mono">Python / FastAPI</span>
+                <div class="skill-bar-item__track" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Python proficiency">
+                  <div class="skill-bar-item__fill" data-width="95"></div>
+                </div>
+                <span class="skill-bar-item__pct dm-mono">95%</span>
+              </div>
+              <div class="skill-bar-item">
+                <span class="skill-bar-item__label dm-mono">Node.js / Express</span>
+                <div class="skill-bar-item__track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Node.js proficiency">
+                  <div class="skill-bar-item__fill" data-width="85"></div>
+                </div>
+                <span class="skill-bar-item__pct dm-mono">85%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Databases & Caching -->
+          <div class="skill-group reveal-up delay-3">
+            <h3 class="skill-group__title">
+              <i class="fa-solid fa-database" aria-hidden="true"></i> Databases & Caching
+            </h3>
+            <div class="skill-tags">
+              <span class="tag">MongoDB</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">Redis</span>
+              <span class="tag">PostgreSQL</span>
+            </div>
+            <div class="skill-bars">
+              <div class="skill-bar-item">
+                <span class="skill-bar-item__label dm-mono">MongoDB / MySQL</span>
+                <div class="skill-bar-item__track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Database proficiency">
+                  <div class="skill-bar-item__fill" data-width="88"></div>
+                </div>
+                <span class="skill-bar-item__pct dm-mono">88%</span>
+              </div>
+              <div class="skill-bar-item">
+                <span class="skill-bar-item__label dm-mono">Redis Caching</span>
+                <div class="skill-bar-item__track" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="Redis proficiency">
+                  <div class="skill-bar-item__fill" data-width="82"></div>
+                </div>
+                <span class="skill-bar-item__pct dm-mono">82%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DevOps & Tools -->
+          <div class="skill-group reveal-up delay-4">
+            <h3 class="skill-group__title">
+              <i class="fa-brands fa-docker" aria-hidden="true"></i> DevOps & Tools
+            </h3>
+            <div class="skill-tags">
+              <span class="tag">GitHub Actions</span>
+              <span class="tag">Jenkins</span>
+              <span class="tag">CI/CD</span>
+              <span class="tag">Playwright</span>
+              <span class="tag">Azure</span>
+              <span class="tag">Power Automate</span>
+              <span class="tag">Jira API</span>
+              <span class="tag">Confluence</span>
+            </div>
+            <div class="skill-bars">
+              <div class="skill-bar-item">
+                <span class="skill-bar-item__label dm-mono">CI/CD Pipelines</span>
+                <div class="skill-bar-item__track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="CI/CD proficiency">
+                  <div class="skill-bar-item__fill" data-width="90"></div>
+                </div>
+                <span class="skill-bar-item__pct dm-mono">90%</span>
+              </div>
+              <div class="skill-bar-item">
+                <span class="skill-bar-item__label dm-mono">Test Automation</span>
+                <div class="skill-bar-item__track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Testing proficiency">
+                  <div class="skill-bar-item__fill" data-width="80"></div>
+                </div>
+                <span class="skill-bar-item__pct dm-mono">80%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== EXPERIENCE SECTION ========== -->
+    <section class="section experience" id="experience" aria-label="Work experience">
+      <div class="container">
+        <div class="section-label reveal-up">
+          <span class="dm-mono accent">03 /</span> Experience
+        </div>
+        <h2 class="section__title reveal-up delay-1">Work <span class="accent">History</span></h2>
+
+        <div class="timeline">
+
+          <!-- Teradata SWE -->
+          <article class="timeline__item reveal-up delay-1">
+            <div class="timeline__marker" aria-hidden="true">
+              <span class="timeline__dot"></span>
+              <span class="timeline__line"></span>
+            </div>
+            <div class="timeline__card">
+              <div class="timeline__card-header">
+                <div>
+                  <h3 class="timeline__company">Teradata</h3>
+                  <p class="timeline__role dm-mono">Software Engineer</p>
+                </div>
+                <span class="timeline__period dm-mono">Jul 2024 — Present</span>
+              </div>
+              <ul class="timeline__bullets" role="list">
+                <li>Architected an <strong>AI-driven ticket deflection system</strong> using LangChain, embeddings & MCP — automated <span class="accent-inline">40% of support volume</span>, saving 15+ engineering hours/week.</li>
+                <li>Engineered a <strong>Text-to-SQL Engine</strong> with schema chunking & prompt optimization, reducing LLM token consumption by <span class="accent-inline">35%</span> while increasing accuracy on complex multi-table joins.</li>
+                <li>Built <strong>Autonomous AI Agents</strong> integrated with Jira & Confluence APIs, deployed via Slack & Microsoft Teams for natural language enterprise operations.</li>
+                <li>Re-engineered <strong>Backend Provisioning Workflows</strong> with task isolation & parallel execution — cloud setup time from <span class="accent-inline">60s → 15s (75% faster)</span>.</li>
+                <li>Optimized <strong>Approval Pipelines</strong> with delta-update processing — end-to-end latency from <span class="accent-inline">40 minutes → &lt;2 minutes (95% reduction)</span>.</li>
+                <li>Productionized <strong>GitHub Actions image creation pipelines</strong>, ensuring 99.9% consistency across all development environments.</li>
+              </ul>
+              <div class="timeline__tags">
+                <span class="tag tag--sm">LangChain</span>
+                <span class="tag tag--sm">Python</span>
+                <span class="tag tag--sm">MCP</span>
+                <span class="tag tag--sm">RAG</span>
+                <span class="tag tag--sm">FastAPI</span>
+                <span class="tag tag--sm">GitHub Actions</span>
+                <span class="tag tag--sm">Jira API</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Teradata Intern -->
+          <article class="timeline__item reveal-up delay-2">
+            <div class="timeline__marker" aria-hidden="true">
+              <span class="timeline__dot"></span>
+              <span class="timeline__line"></span>
+            </div>
+            <div class="timeline__card">
+              <div class="timeline__card-header">
+                <div>
+                  <h3 class="timeline__company">Teradata</h3>
+                  <p class="timeline__role dm-mono">Software Engineer Intern</p>
+                </div>
+                <span class="timeline__period dm-mono">Jan 2024 — Jun 2024</span>
+              </div>
+              <ul class="timeline__bullets" role="list">
+                <li>Built <strong>Python-based data extraction tools</strong> to automate PDF-to-Excel workflow validation, cutting manual audit effort by <span class="accent-inline">80%</span>.</li>
+                <li>Developed early-stage <strong>backend chatbot logic</strong>, facilitating the transition from POC to production-ready system.</li>
+              </ul>
+              <div class="timeline__tags">
+                <span class="tag tag--sm">Python</span>
+                <span class="tag tag--sm">Data Extraction</span>
+                <span class="tag tag--sm">Chatbot</span>
+                <span class="tag tag--sm">Backend</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Fusion Technologies -->
+          <article class="timeline__item reveal-up delay-3">
+            <div class="timeline__marker" aria-hidden="true">
+              <span class="timeline__dot"></span>
+            </div>
+            <div class="timeline__card">
+              <div class="timeline__card-header">
+                <div>
+                  <h3 class="timeline__company">Fusion Technologies</h3>
+                  <p class="timeline__role dm-mono">Software Engineer Intern</p>
+                </div>
+                <span class="timeline__period dm-mono">Sep 2023 — Dec 2023</span>
+              </div>
+              <ul class="timeline__bullets" role="list">
+                <li>Improved <strong>API performance by 40%</strong> through Redis caching layers and query indexing for high-traffic endpoints.</li>
+                <li>Built <strong>automated security testing frameworks</strong> to identify and mitigate vulnerabilities in web applications (DVWA, Juice-Shop).</li>
+              </ul>
+              <div class="timeline__tags">
+                <span class="tag tag--sm">Redis</span>
+                <span class="tag tag--sm">Node.js</span>
+                <span class="tag tag--sm">Security Testing</span>
+                <span class="tag tag--sm">API Optimization</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Education callout -->
+        <div class="edu-card reveal-up delay-4" aria-label="Education">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+          <div>
+            <p class="edu-card__degree">B.Tech Computer Science — <span class="accent">IIT Jammu</span></p>
+            <p class="dm-mono edu-card__meta">Nov 2020 – Oct 2024 &nbsp;·&nbsp; CGPA 8.39/10 &nbsp;·&nbsp; JEE Mains 99.45 percentile (top 6,000 / 1M+ candidates)</p>
+            <p class="dm-mono edu-card__meta" style="margin-top:0.3rem;">Among top scorers in CBSE 12th at district level</p>
+    </section>
+
+    <!-- ========== PROJECTS SECTION ========== -->
+    <section class="section projects" id="projects" aria-label="Projects">
+      <div class="container">
+        <div class="section-label reveal-up">
+          <span class="dm-mono accent">04 /</span> Projects
+        </div>
+        <h2 class="section__title reveal-up delay-1">Featured <span class="accent">Work</span></h2>
+
+        <div class="projects__grid">
+
+          <!-- Project 1 -->
+          <article class="project-card reveal-up delay-1">
+            <div class="project-card__top">
+              <i class="fa-solid fa-ticket project-card__icon" aria-hidden="true"></i>
+              <div class="project-card__links">
+                <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" class="icon-btn">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="#" aria-label="Live demo" class="icon-btn">
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-card__title">AI Ticket Deflection System</h3>
+            <p class="project-card__desc">LLM-powered support automation that classifies requests into self-service vs admin workflows. Eliminates duplicate tickets and delivers AI-resolved answers directly to users via Slack.</p>
+            <div class="project-card__impact">
+              <span class="impact-badge">40% support automated</span>
+              <span class="impact-badge">15+ hrs/week saved</span>
+            </div>
+            <div class="project-card__tags">
+              <span class="tag tag--sm">LangChain</span>
+              <span class="tag tag--sm">MCP</span>
+              <span class="tag tag--sm">Python</span>
+              <span class="tag tag--sm">Slack API</span>
+              <span class="tag tag--sm">Embeddings</span>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card reveal-up delay-2">
+            <div class="project-card__top">
+              <i class="fa-solid fa-code project-card__icon" aria-hidden="true"></i>
+              <div class="project-card__links">
+                <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" class="icon-btn">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="#" aria-label="Live demo" class="icon-btn">
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-card__title">Text-to-SQL Engine</h3>
+            <p class="project-card__desc">Schema chunking & prompt optimization engine that converts natural language queries to accurate SQL. Handles complex multi-table joins with 35% lower token usage than baseline.</p>
+            <div class="project-card__impact">
+              <span class="impact-badge">35% token reduction</span>
+              <span class="impact-badge">Higher accuracy</span>
+            </div>
+            <div class="project-card__tags">
+              <span class="tag tag--sm">Python</span>
+              <span class="tag tag--sm">LLM</span>
+              <span class="tag tag--sm">SQL</span>
+              <span class="tag tag--sm">Prompt Engineering</span>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card reveal-up delay-3">
+            <div class="project-card__top">
+              <i class="fa-solid fa-robot project-card__icon" aria-hidden="true"></i>
+              <div class="project-card__links">
+                <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" class="icon-btn">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="#" aria-label="Live demo" class="icon-btn">
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-card__title">Autonomous Enterprise AI Agents</h3>
+            <p class="project-card__desc">AI agents integrated with Jira & Confluence APIs, deployed via Slack and Teams. Replace manual enterprise operations with natural language commands — zero context switching.</p>
+            <div class="project-card__impact">
+              <span class="impact-badge">NL enterprise ops</span>
+              <span class="impact-badge">Jira + Confluence</span>
+            </div>
+            <div class="project-card__tags">
+              <span class="tag tag--sm">LangChain</span>
+              <span class="tag tag--sm">Jira API</span>
+              <span class="tag tag--sm">MS Teams</span>
+              <span class="tag tag--sm">FastAPI</span>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card reveal-up delay-1">
+            <div class="project-card__top">
+              <i class="fa-solid fa-pipe-section project-card__icon" aria-hidden="true"></i>
+              <div class="project-card__links">
+                <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" class="icon-btn">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="#" aria-label="Live demo" class="icon-btn">
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-card__title">Enterprise CI/CD & Monitoring</h3>
+            <p class="project-card__desc">Automated Jenkins pipelines for token renewal, API sync, and stale-data alerts. Daily Playwright test suite with database-backed reporting — full system health visibility.</p>
+            <div class="project-card__impact">
+              <span class="impact-badge">6+ hrs/week saved</span>
+              <span class="impact-badge">99.9% consistency</span>
+            </div>
+            <div class="project-card__tags">
+              <span class="tag tag--sm">Jenkins</span>
+              <span class="tag tag--sm">Playwright</span>
+              <span class="tag tag--sm">GitHub Actions</span>
+              <span class="tag tag--sm">Python</span>
+            </div>
+          </article>
+
+          <!-- Project 5 -->
+          <article class="project-card reveal-up delay-2">
+            <div class="project-card__top">
+              <i class="fa-solid fa-arrows-rotate project-card__icon" aria-hidden="true"></i>
+              <div class="project-card__links">
+                <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" class="icon-btn">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="#" aria-label="Live demo" class="icon-btn">
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-card__title">Tempo Workload Sync Engine</h3>
+            <p class="project-card__desc">Backend service for automatic workload schema synchronization with LOA data. Includes duplicate detection, rollback logic, and daily audit trails for enterprise resource tracking.</p>
+            <div class="project-card__impact">
+              <span class="impact-badge">100% data accuracy</span>
+              <span class="impact-badge">Auto rollback</span>
+            </div>
+            <div class="project-card__tags">
+              <span class="tag tag--sm">Python</span>
+              <span class="tag tag--sm">MongoDB</span>
+              <span class="tag tag--sm">REST API</span>
+              <span class="tag tag--sm">Audit Logs</span>
+            </div>
+          </article>
+
+          <!-- Project 6 -->
+          <article class="project-card reveal-up delay-3">
+            <div class="project-card__top">
+              <i class="fa-solid fa-bolt project-card__icon" aria-hidden="true"></i>
+              <div class="project-card__links">
+                <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" class="icon-btn">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="#" aria-label="Live demo" class="icon-btn">
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-card__title">Backend Provisioning Optimizer</h3>
+            <p class="project-card__desc">Re-engineered cloud provisioning workflows using task isolation and parallel execution, dramatically reducing setup time for development environments.</p>
+            <div class="project-card__impact">
+              <span class="impact-badge">75% faster setup</span>
+              <span class="impact-badge">60s → 15s</span>
+            </div>
+            <div class="project-card__tags">
+              <span class="tag tag--sm">Python</span>
+              <span class="tag tag--sm">Azure</span>
+              <span class="tag tag--sm">Async</span>
+              <span class="tag tag--sm">System Design</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION ========== -->
+    <section class="section contact" id="contact" aria-label="Contact">
+      <div class="container">
+        <div class="section-label reveal-up">
+          <span class="dm-mono accent">05 /</span> Contact
+        </div>
+        <h2 class="section__title reveal-up delay-1">Let's <span class="accent">Work Together</span></h2>
+        <p class="contact__intro reveal-up delay-2">Have an interesting problem to solve or a role I'd be a fit for? I'm always open to new conversations.</p>
+
+        <div class="contact__grid">
+          <div class="contact__info reveal-up delay-2">
+            <a href="mailto:mohdanas9595@gmail.com" class="contact-link" aria-label="Email">
+              <div class="contact-link__icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
+              <div>
+                <span class="contact-link__label dm-mono">Email</span>
+                <span class="contact-link__value">mohdanas9595@gmail.com</span>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/mohd-anas-a5b149202" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="LinkedIn">
+              <div class="contact-link__icon"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></div>
+              <div>
+                <span class="contact-link__label dm-mono">LinkedIn</span>
+                <span class="contact-link__value">mohd-anas-a5b149202</span>
+              </div>
+            </a>
+            <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="GitHub">
+              <div class="contact-link__icon"><i class="fa-brands fa-github" aria-hidden="true"></i></div>
+              <div>
+                <span class="contact-link__label dm-mono">GitHub</span>
+                <span class="contact-link__value">github.com/Anxs-11</span>
+              </div>
+            </a>
+            <a href="tel:+917534024294" class="contact-link" aria-label="Phone">
+              <div class="contact-link__icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></div>
+              <div>
+                <span class="contact-link__label dm-mono">Phone</span>
+                <span class="contact-link__value">+91 7534024294</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- Contact Form -->
+          <!-- 
+            CUSTOMIZATION: To send real emails, replace the form action with EmailJS.
+            1. Sign up at https://emailjs.com
+            2. Uncomment the EmailJS <script> tag at the bottom of this file
+            3. Replace YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, YOUR_PUBLIC_KEY in script.js
+            The current implementation uses mailto: as a fallback.
+          -->
+          <form class="contact-form reveal-up delay-3" id="contact-form" novalidate aria-label="Contact form">
+            <div class="form-group">
+              <label for="name" class="form-label dm-mono">Name</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required autocomplete="name" />
+              <span class="form-error" id="name-error" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label dm-mono">Email</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required autocomplete="email" />
+              <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="message" class="form-label dm-mono">Message</label>
+              <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell me about your project or opportunity..." required rows="5"></textarea>
+              <span class="form-error" id="message-error" role="alert" aria-live="polite"></span>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full" id="submit-btn">
+              Send Message <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            </button>
+            <p class="form-success" id="form-success" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <a href="#hero" class="footer__logo" aria-label="Back to top">
+          <span class="nav__logo-bracket">[</span>MA<span class="nav__logo-bracket">]</span>
+        </a>
+
+        <p class="footer__copy dm-mono">© 2025 Mohd Anas. Crafted with precision.</p>
+
+        <div class="footer__socials">
+          <a href="https://github.com/Anxs-11" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="footer__social-link">
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+          </a>
+          <a href="https://linkedin.com/in/mohd-anas-a5b149202" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="footer__social-link">
+            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+          </a>
+          <a href="mailto:mohdanas9595@gmail.com" aria-label="Email" class="footer__social-link">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Optional EmailJS CDN (enable only if using EmailJS in script.js) -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script> -->
+
+  <script src="script.js"></script>
+</body>
+</html>
