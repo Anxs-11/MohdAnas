@@ -1254,12 +1254,12 @@ ul { list-style: none; }
   align-items: center;
   gap: 0.35rem;
   padding: 0.25rem 0.65rem;
-  background: rgba(255, 85, 102, 0.1);
-  border: 1px solid rgba(255, 85, 102, 0.3);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-accent);
   border-radius: 100px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: #FF8896;
+  color: var(--accent);
   white-space: nowrap;
 }
 

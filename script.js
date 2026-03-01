@@ -395,7 +395,7 @@ const PROJECT_DATA = {
       'Implemented duplicate detection to collapse redundant submissions before they reached the engineering queue',
     ],
     impact: ['40% support volume automated', '15+ engineering hours saved/week', 'Duplicate tickets eliminated'],
-    tech: ['LangChain', 'MCP', 'Python', 'Slack API', 'Embeddings', 'FastAPI'],
+    tech: ['LangChain', 'MCP', 'Python', 'Embeddings', 'FastAPI'],
   },
   'text-to-sql': {
     icon: 'fa-code',
