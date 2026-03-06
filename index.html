@@ -519,6 +519,43 @@
 
         <div class="projects__grid">
 
+          <!-- AEA — Personal Project (FEATURED) -->
+          <article class="project-card project-card--featured reveal-up delay-1">
+            <div class="project-card__featured-inner">
+              <div class="project-card__featured-left">
+                <div class="project-card__top">
+                  <i class="fa-solid fa-code-pull-request project-card__icon" aria-hidden="true"></i>
+                  <div style="display:flex;align-items:center;gap:0.6rem;">
+                    <span class="badge--personal"><i class="fa-solid fa-flask" aria-hidden="true"></i> Personal &middot; In Progress</span>
+                    <a href="https://github.com/Anxs-11/autonomous-engineering-agent" target="_blank" rel="noopener noreferrer" class="project-card__github-link" aria-label="View AEA on GitHub">
+                      <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+                <h3 class="project-card__title">Autonomous Engineering Agent &mdash; <span class="accent">AEA</span></h3>
+                <p class="project-card__desc">An AI system that reads Jira tickets and autonomously writes code and opens GitHub Pull Requests &mdash; zero human intervention. Uses a two-pass Claude approach: first identifies relevant files from the repo tree, then reads them in full for accurate, context-aware code generation tailored to the existing codebase style.</p>
+                <button class="btn btn--details" data-project="aea">View Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+              </div>
+              <div class="project-card__featured-right">
+                <div class="project-card__impact" style="margin-bottom:1rem;">
+                  <span class="impact-badge impact-badge--personal">Zero human code written</span>
+                  <span class="impact-badge impact-badge--personal">Jira ticket &rarr; GitHub PR</span>
+                  <span class="impact-badge impact-badge--personal">Two-pass AI generation</span>
+                  <span class="impact-badge impact-badge--personal">Multi-repo via Jira labels</span>
+                </div>
+                <div class="project-card__tags">
+                  <span class="tag tag--sm">FastAPI</span>
+                  <span class="tag tag--sm">Claude (Anthropic)</span>
+                  <span class="tag tag--sm">GitHub REST API</span>
+                  <span class="tag tag--sm">Jira REST API</span>
+                  <span class="tag tag--sm">SQLite + SQLAlchemy</span>
+                  <span class="tag tag--sm">ChromaDB</span>
+                  <span class="tag tag--sm">Python 3.14</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
           <!-- Project 1 -->
           <article class="project-card reveal-up delay-1">
             <div class="project-card__top">

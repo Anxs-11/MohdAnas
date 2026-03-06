@@ -385,6 +385,23 @@ const submitBtn  = document.getElementById('submit-btn');
    Full problem / solution / impact breakdown
 ───────────────────────────────────────────── */
 const PROJECT_DATA = {
+  'aea': {
+    icon: 'fa-code-pull-request',
+    internal: false,
+    badgeText: 'Personal &middot; In Progress',
+    repoUrl: 'https://github.com/Anxs-11/autonomous-engineering-agent',
+    title: 'Autonomous Engineering Agent (AEA)',
+    problem: 'Every Jira ticket describing a feature or bug fix requires a developer to manually read the ticket, understand the codebase, write the code, and open a PR — a high-friction loop that is almost entirely automatable with the right AI pipeline.',
+    solution: [
+      'Built a FastAPI webhook server that receives real-time Jira events and uses Claude to classify tickets as automatable, needs clarification, too complex, or non-code related — posting targeted clarifying questions as Jira comments when a ticket is vague',
+      'Engineered a two-pass code generation system: Pass 1 asks Claude to identify relevant files from the full repository tree; Pass 2 feeds those full file contents to Claude for context-aware code generation — solving the file-blindness problem of naive chunk-based RAG',
+      'Automated the full GitHub PR lifecycle — feature branch creation, multi-file commits with real code changes, and PR opening — via the GitHub REST API, with zero developer code written',
+      'Implemented stateful ticket lifecycle tracking (SQLite + SQLAlchemy) with state transitions (AWAITING_CLARIFICATION → AUTOMATABLE → PR created), duplicate webhook protection, and a retry mechanism via the aea-retry Jira label',
+      'Designed label-based repo routing: the target GitHub repository is read from a repo:owner/name Jira label, making the agent flexible across multiple projects without any configuration changes'
+    ],
+    impact: ['Zero developer code written end-to-end', 'Jira ticket → mergeable GitHub PR autonomously', 'Multi-repo routing via Jira labels'],
+    tech: ['FastAPI', 'Claude (Anthropic)', 'GitHub REST API', 'Jira REST API', 'SQLite', 'SQLAlchemy', 'ChromaDB', 'Python 3.14', 'uvicorn'],
+  },
   'ticket-deflection': {
     icon: 'fa-ticket',
     internal: true,
@@ -476,7 +493,34 @@ const PROJECT_DATA = {
 
     document.getElementById('modal-icon').className = `fa-solid ${data.icon}`;
     document.getElementById('modal-title').textContent = data.title;
-    document.getElementById('modal-badge').style.display = data.internal ? '' : 'none';
+    const badgeEl = document.getElementById('modal-badge');
+    if (data.internal) {
+      badgeEl.className = 'badge--internal';
+      badgeEl.innerHTML = '<i class="fa-solid fa-lock" aria-hidden="true"></i> Internal &middot; Teradata';
+      badgeEl.style.display = '';
+    } else if (data.badgeText) {
+      badgeEl.className = 'badge--personal';
+      badgeEl.innerHTML = `<i class="fa-solid fa-flask" aria-hidden="true"></i> ${data.badgeText}`;
+      badgeEl.style.display = '';
+    } else {
+      badgeEl.style.display = 'none';
+    }
+
+    // GitHub repo link in modal header
+    const existingRepoLink = document.getElementById('modal-repo-link');
+    if (existingRepoLink) existingRepoLink.remove();
+    if (data.repoUrl) {
+      const repoLink = document.createElement('a');
+      repoLink.id = 'modal-repo-link';
+      repoLink.href = data.repoUrl;
+      repoLink.target = '_blank';
+      repoLink.rel = 'noopener noreferrer';
+      repoLink.className = 'modal__repo-link';
+      repoLink.setAttribute('aria-label', 'View on GitHub');
+      repoLink.innerHTML = '<i class="fa-brands fa-github" aria-hidden="true"></i> View on GitHub';
+      document.querySelector('.modal__header').appendChild(repoLink);
+    }
+
     document.getElementById('modal-problem').textContent = data.problem;
 
     const solEl = document.getElementById('modal-solution');
