@@ -400,7 +400,7 @@ const PROJECT_DATA = {
       'Designed label-based repo routing: the target GitHub repository is read from a repo:owner/name Jira label, making the agent flexible across multiple projects without any configuration changes'
     ],
     impact: ['Zero developer code written end-to-end', 'Jira ticket → mergeable GitHub PR autonomously', 'Multi-repo routing via Jira labels'],
-    tech: ['FastAPI', 'Claude (Anthropic)', 'GitHub REST API', 'Jira REST API', 'SQLite', 'SQLAlchemy', 'ChromaDB', 'Python 3.14', 'uvicorn'],
+    tech: ['FastAPI', 'Claude (Anthropic)', 'GitHub REST API', 'Jira REST API', 'SQLite', 'SQLAlchemy', 'Python 3.14', 'uvicorn'],
   },
   'ticket-deflection': {
     icon: 'fa-ticket',
