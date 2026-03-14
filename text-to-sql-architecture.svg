@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="'DM Mono','Courier New',monospace" font-size="11">
+  <defs>
+    <marker id="arr-g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#00E5A0"/></marker>
+    <marker id="arr-y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#FFD700"/></marker>
+    <marker id="arr-r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff6b6b"/></marker>
+    <marker id="arr-b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#4C9AFF"/></marker>
+    <marker id="arr-p" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#B388FF"/></marker>
+    <marker id="arr-dim" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#555"/></marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="700" fill="#080C0F" rx="12"/>
+
+  <!-- Title -->
+  <text x="30" y="30" fill="#555" font-size="9" letter-spacing="2">— PROJECT — ARCHITECTURE DIAGRAM —</text>
+  <text x="30" y="54" fill="#fff" font-size="18" font-weight="700" font-family="'Syne',sans-serif">Text-to-SQL Engine</text>
+  <text x="600" y="54" fill="#00E5A0" font-size="12" font-weight="700">Teradata SQL · RAG · Schema Chunking</text>
+
+  <!-- ── INPUT ── -->
+  <rect x="310" y="72" width="280" height="48" rx="8" fill="#0d1117" stroke="#4C9AFF" stroke-width="2"/>
+  <text x="450" y="90" fill="#4C9AFF" font-size="8" text-anchor="middle" letter-spacing="2">INPUT</text>
+  <text x="450" y="108" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">Natural Language Question</text>
+
+  <!-- Arrow: Input → Intent -->
+  <line x1="450" y1="120" x2="450" y2="148" stroke="#4C9AFF" stroke-width="1.5" marker-end="url(#arr-b)"/>
+
+  <!-- ── STEP 1: INTENT DETECTION / TABLE SELECTION ── -->
+  <rect x="310" y="150" width="280" height="84" rx="8" fill="#0d1117" stroke="#00E5A0" stroke-width="2"/>
+  <text x="450" y="168" fill="#00E5A0" font-size="8" text-anchor="middle" letter-spacing="2">STEP 1 · RAG</text>
+  <text x="450" y="184" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">Intent Detection</text>
+  <text x="450" y="200" fill="#aaa" font-size="8.5" text-anchor="middle">identify request type</text>
+  <text x="450" y="214" fill="#aaa" font-size="8.5" text-anchor="middle">select relevant tables</text>
+  <text x="450" y="226" fill="#555" font-size="8" text-anchor="middle">matched from RAG knowledge base</text>
+
+  <!-- ── RAG Knowledge Base (left annotation) ── -->
+  <rect x="30" y="148" width="200" height="96" rx="6" fill="#0d1117" stroke="#B388FF" stroke-width="1.5"/>
+  <text x="130" y="168" fill="#B388FF" font-size="8" text-anchor="middle" letter-spacing="2">RAG KNOWLEDGE BASE</text>
+  <text x="130" y="185" fill="#fff" font-size="9.5" text-anchor="middle">Request type samples</text>
+  <text x="130" y="200" fill="#aaa" font-size="8.5" text-anchor="middle">→ tables required</text>
+  <text x="130" y="215" fill="#aaa" font-size="8.5" text-anchor="middle">→ schema shape</text>
+  <text x="130" y="230" fill="#aaa" font-size="8.5" text-anchor="middle">→ query pattern</text>
+
+  <!-- Arrow: RAG KB → Step 1 -->
+  <line x1="230" y1="196" x2="308" y2="196" stroke="#B388FF" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-p)"/>
+
+  <!-- Arrow: Step 1 → Step 2 -->
+  <line x1="450" y1="234" x2="450" y2="262" stroke="#00E5A0" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <rect x="456" y="240" width="74" height="13" rx="3" fill="#080C0F"/>
+  <text x="493" y="250" fill="#00E5A0" font-size="7.5" text-anchor="middle">relevant tables</text>
+
+  <!-- ── STEP 2: SCHEMA FETCH ── -->
+  <rect x="310" y="264" width="280" height="70" rx="8" fill="#0d1117" stroke="#00E5A0" stroke-width="2"/>
+  <text x="450" y="282" fill="#00E5A0" font-size="8" text-anchor="middle" letter-spacing="2">STEP 2 · OPTIMISATION</text>
+  <text x="450" y="298" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">Fetch Table Schemas</text>
+  <text x="450" y="314" fill="#aaa" font-size="8.5" text-anchor="middle">selected tables only · passed in chunks</text>
+  <text x="450" y="326" fill="#555" font-size="8" text-anchor="middle">full schema never sent → 35% token reduction</text>
+
+  <!-- Cost optimisation annotation (right) -->
+  <rect x="620" y="264" width="190" height="70" rx="6" fill="#0d1117" stroke="#FFD700" stroke-width="1"/>
+  <text x="715" y="282" fill="#FFD700" font-size="8" text-anchor="middle" letter-spacing="2">COST OPTIMISATION</text>
+  <text x="715" y="298" fill="#aaa" font-size="8.5" text-anchor="middle">schema chunking strategy</text>
+  <text x="715" y="312" fill="#aaa" font-size="8.5" text-anchor="middle">only relevant tables fetched</text>
+  <text x="715" y="326" fill="#aaa" font-size="8.5" text-anchor="middle">avoids full-schema noise</text>
+  <line x1="590" y1="299" x2="618" y2="299" stroke="#FFD700" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Arrow: Step 2 → Step 3 -->
+  <line x1="450" y1="334" x2="450" y2="362" stroke="#00E5A0" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <rect x="456" y="340" width="80" height="13" rx="3" fill="#080C0F"/>
+  <text x="496" y="350" fill="#00E5A0" font-size="7.5" text-anchor="middle">schema + prompt</text>
+
+  <!-- ── STEP 3: SQL GENERATION ── -->
+  <rect x="310" y="364" width="280" height="84" rx="8" fill="#0d1117" stroke="#00E5A0" stroke-width="2.5"/>
+  <text x="450" y="382" fill="#00E5A0" font-size="8" text-anchor="middle" letter-spacing="2">STEP 3 · LLM</text>
+  <text x="450" y="398" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">SQL Generation</text>
+  <text x="450" y="414" fill="#aaa" font-size="8.5" text-anchor="middle">builds Teradata-compliant SQL</text>
+  <text x="450" y="428" fill="#aaa" font-size="8.5" text-anchor="middle">few-shot examples · join patterns</text>
+  <text x="450" y="440" fill="#555" font-size="8" text-anchor="middle">Teradata syntax rules enforced in prompt</text>
+
+  <!-- Teradata Rules annotation (right) -->
+  <rect x="620" y="364" width="190" height="84" rx="6" fill="#0d1117" stroke="#ff6b6b" stroke-width="1"/>
+  <text x="715" y="382" fill="#ff6b6b" font-size="8" text-anchor="middle" letter-spacing="2">TERADATA SQL RULES</text>
+  <text x="715" y="398" fill="#aaa" font-size="8.5" text-anchor="middle">QUALIFY instead of subquery</text>
+  <text x="715" y="412" fill="#aaa" font-size="8.5" text-anchor="middle">TOP N not LIMIT</text>
+  <text x="715" y="426" fill="#aaa" font-size="8.5" text-anchor="middle">CAST syntax differences</text>
+  <text x="715" y="440" fill="#aaa" font-size="8.5" text-anchor="middle">injected into system prompt</text>
+  <line x1="590" y1="406" x2="618" y2="406" stroke="#ff6b6b" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Arrow: Step 3 → EXPLAIN -->
+  <line x1="450" y1="448" x2="450" y2="476" stroke="#00E5A0" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <rect x="456" y="453" width="68" height="13" rx="3" fill="#080C0F"/>
+  <text x="490" y="463" fill="#00E5A0" font-size="7.5" text-anchor="middle">generated SQL</text>
+
+  <!-- ── STEP 4: EXPLAIN VALIDATION ── -->
+  <rect x="310" y="478" width="280" height="70" rx="8" fill="#0d1117" stroke="#FFD700" stroke-width="2"/>
+  <text x="450" y="496" fill="#FFD700" font-size="8" text-anchor="middle" letter-spacing="2">STEP 4 · VALIDATION</text>
+  <text x="450" y="512" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">EXPLAIN Keyword Check</text>
+  <text x="450" y="528" fill="#aaa" font-size="8.5" text-anchor="middle">runs EXPLAIN on Teradata · no data read</text>
+  <text x="450" y="540" fill="#555" font-size="8" text-anchor="middle">catches syntax errors before execution</text>
+
+  <!-- Error loop: EXPLAIN → back to SQL Gen (left side) -->
+  <path d="M310,513 L270,513 L270,406 L308,406" stroke="#ff6b6b" stroke-width="1.2" stroke-dasharray="5,3" fill="none" marker-end="url(#arr-r)"/>
+  <rect x="236" y="450" width="38" height="28" rx="3" fill="#080C0F"/>
+  <text x="255" y="462" fill="#ff6b6b" font-size="7.5" text-anchor="middle">error</text>
+  <text x="255" y="473" fill="#ff6b6b" font-size="7.5" text-anchor="middle">regen</text>
+
+  <!-- Arrow: EXPLAIN valid → Execute -->
+  <line x1="450" y1="548" x2="450" y2="576" stroke="#00E5A0" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <rect x="456" y="554" width="36" height="13" rx="3" fill="#080C0F"/>
+  <text x="474" y="564" fill="#00E5A0" font-size="7.5" text-anchor="middle">valid</text>
+
+  <!-- ── STEP 5: EXECUTE ── -->
+  <rect x="310" y="578" width="280" height="56" rx="8" fill="#0d1117" stroke="#00E5A0" stroke-width="2"/>
+  <text x="450" y="596" fill="#00E5A0" font-size="8" text-anchor="middle" letter-spacing="2">STEP 5 · EXECUTION</text>
+  <text x="450" y="612" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">Execute on Teradata DB</text>
+  <text x="450" y="626" fill="#aaa" font-size="8.5" text-anchor="middle">fetch results · convert to natural language</text>
+
+  <!-- Arrow: Execute → User (right) -->
+  <line x1="590" y1="606" x2="618" y2="606" stroke="#4C9AFF" stroke-width="1.5" marker-end="url(#arr-b)"/>
+
+  <!-- OUTPUT -->
+  <rect x="620" y="578" width="190" height="56" rx="8" fill="#0a1a12" stroke="#4C9AFF" stroke-width="2"/>
+  <text x="715" y="596" fill="#4C9AFF" font-size="8" text-anchor="middle" letter-spacing="2">OUTPUT</text>
+  <text x="715" y="612" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">Answer to User</text>
+  <text x="715" y="626" fill="#aaa" font-size="8.5" text-anchor="middle">natural language · no SQL exposed</text>
+
+  <!-- Left side metrics -->
+  <text x="30" y="318" fill="#555" font-size="8" letter-spacing="2">— IMPACT —</text>
+  <rect x="30" y="330" width="190" height="54" rx="6" fill="#0a1a12" stroke="#00E5A0" stroke-width="1.5"/>
+  <text x="125" y="350" fill="#00E5A0" font-size="20" text-anchor="middle" font-weight="700">35%</text>
+  <text x="125" y="368" fill="#aaa" font-size="8.5" text-anchor="middle">reduction in LLM token usage</text>
+
+  <rect x="30" y="396" width="190" height="68" rx="6" fill="#0a1a12" stroke="#00E5A0" stroke-width="1.5"/>
+  <text x="125" y="416" fill="#00E5A0" font-size="11" text-anchor="middle" font-weight="700">No DB credentials</text>
+  <text x="125" y="432" fill="#aaa" font-size="8.5" text-anchor="middle">analysts query Teradata in</text>
+  <text x="125" y="446" fill="#aaa" font-size="8.5" text-anchor="middle">plain English — no SQL needed</text>
+
+  <rect x="30" y="476" width="190" height="68" rx="6" fill="#0a1a12" stroke="#00E5A0" stroke-width="1.5"/>
+  <text x="125" y="496" fill="#00E5A0" font-size="11" text-anchor="middle" font-weight="700">Zero execution risk</text>
+  <text x="125" y="512" fill="#aaa" font-size="8.5" text-anchor="middle">EXPLAIN validates SQL before</text>
+  <text x="125" y="526" fill="#aaa" font-size="8.5" text-anchor="middle">any data is touched</text>
+
+  <!-- Footer -->
+  <text x="450" y="672" fill="#333" font-size="8" text-anchor="middle">RAG Intent Detection · Schema Chunking · Teradata SQL Rules · EXPLAIN Validation · LLM Synthesis</text>
+</svg>

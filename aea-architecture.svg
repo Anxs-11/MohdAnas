@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 740" font-family="'DM Mono', 'Courier New', monospace" font-size="11">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#00E5A0"/>
+    </marker>
+    <marker id="arrow-dim" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#555"/>
+    </marker>
+    <marker id="arrow-yellow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#FFD700"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#B388FF"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="740" fill="#080C0F" rx="12"/>
+
+  <!-- Title area -->
+  <text x="30" y="32" fill="#555" font-size="9" letter-spacing="2">— PROJECT AEA — ARCHITECTURE DIAGRAM —</text>
+  <text x="30" y="56" fill="#fff" font-size="18" font-weight="700" font-family="'Syne', sans-serif">Autonomous Engineering Agent</text>
+  <text x="430" y="56" fill="#00E5A0" font-size="14" font-weight="700" font-family="'DM Mono', monospace">FastAPI · ThreadPoolExecutor</text>
+
+  <!-- DEVELOPER INPUT -->
+  <rect x="310" y="75" width="170" height="44" rx="6" fill="#1a1f24" stroke="#444" stroke-width="1.5"/>
+  <text x="395" y="91" fill="#888" font-size="8" text-anchor="middle" letter-spacing="1.5">INPUT</text>
+  <text x="395" y="109" fill="#fff" font-size="13" text-anchor="middle" font-weight="700">Developer</text>
+
+  <!-- Arrow: Developer → Classifier -->
+  <line x1="395" y1="119" x2="395" y2="146" stroke="#00E5A0" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="405" y="136" fill="#555" font-size="8">POST /webhook/jira</text>
+
+  <!-- CLASSIFIER box -->
+  <rect x="185" y="148" width="420" height="78" rx="6" fill="#0d1117" stroke="#B388FF" stroke-width="2"/>
+  <text x="395" y="165" fill="#B388FF" font-size="8" text-anchor="middle" letter-spacing="2">CLASSIFIER</text>
+  <text x="395" y="182" fill="#fff" font-size="11.5" text-anchor="middle" font-weight="600">Claude · reads ticket · SQLite state</text>
+  <text x="280" y="202" fill="#00E5A0" font-size="9" text-anchor="middle">AUTOMATABLE</text>
+  <text x="340" y="202" fill="#555" font-size="9" text-anchor="middle">·</text>
+  <text x="395" y="202" fill="#ccc" font-size="9" text-anchor="middle">CLARIFICATION</text>
+  <text x="250" y="216" fill="#ff6b6b" font-size="9" text-anchor="middle">COMPLEX</text>
+  <text x="340" y="216" fill="#555" font-size="9" text-anchor="middle">·</text>
+  <text x="455" y="216" fill="#ccc" font-size="9" text-anchor="middle">NONCODE → stored · skipped</text>
+
+  <!-- Arrow: Classifier → Service 01 (automatable + repo exists) -->
+  <line x1="260" y1="226" x2="175" y2="278" stroke="#00E5A0" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="175" y="252" fill="#00E5A0" font-size="8">automatable</text>
+  <text x="175" y="263" fill="#00E5A0" font-size="8">+ repo exists</text>
+
+  <!-- Arrow: Classifier → Intermediate (automatable + no repo) -->
+  <line x1="395" y1="226" x2="395" y2="278" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-dim)"/>
+  <text x="400" y="252" fill="#555" font-size="8">automatable</text>
+  <text x="400" y="263" fill="#555" font-size="8">+ no repo</text>
+
+  <!-- Arrow: Classifier → Service 02 (clarification) -->
+  <line x1="535" y1="226" x2="650" y2="278" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-yellow)"/>
+  <text x="585" y="252" fill="#FFD700" font-size="8">clarification</text>
+
+  <!-- SERVICE 01: Code Generator -->
+  <rect x="30" y="280" width="220" height="100" rx="6" fill="#0d1117" stroke="#00E5A0" stroke-width="2"/>
+  <text x="140" y="297" fill="#00E5A0" font-size="8" text-anchor="middle" letter-spacing="2">SERVICE 01</text>
+  <text x="140" y="313" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">Code Generator</text>
+  <text x="140" y="330" fill="#aaa" font-size="9" text-anchor="middle">Pass 1 · file tree selection</text>
+  <text x="140" y="344" fill="#aaa" font-size="9" text-anchor="middle">Pass 2 · generate changes</text>
+  <text x="140" y="358" fill="#aaa" font-size="9" text-anchor="middle">Claude · GitHub fetcher</text>
+
+  <!-- INTERMEDIATE STATE -->
+  <rect x="275" y="280" width="240" height="100" rx="6" fill="#0d1117" stroke="#555" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="395" y="297" fill="#555" font-size="8" text-anchor="middle" letter-spacing="2">INTERMEDIATE STATE</text>
+  <text x="395" y="313" fill="#888" font-size="12" text-anchor="middle" font-weight="700">AWAITING_REPO</text>
+  <text x="395" y="330" fill="#666" font-size="8.5" text-anchor="middle">prompts dev to add repo label</text>
+  <text x="395" y="344" fill="#666" font-size="8.5" text-anchor="middle">→ triggers Service 01 on label add</text>
+
+  <!-- SERVICE 02: Question Generator -->
+  <rect x="540" y="280" width="220" height="100" rx="6" fill="#0d1117" stroke="#FFD700" stroke-width="2"/>
+  <text x="650" y="297" fill="#FFD700" font-size="8" text-anchor="middle" letter-spacing="2">SERVICE 02</text>
+  <text x="650" y="313" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">Question Generator</text>
+  <text x="650" y="330" fill="#aaa" font-size="9" text-anchor="middle">posts questions to Jira</text>
+  <text x="650" y="344" fill="#aaa" font-size="9" text-anchor="middle">waits for human reply</text>
+  <text x="650" y="358" fill="#aaa" font-size="9" text-anchor="middle">re-classify → Service 01</text>
+
+  <!-- Arrow: Service 01 → Service 03 -->
+  <line x1="140" y1="380" x2="140" y2="422" stroke="#00E5A0" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: Service 02 → Service 01 (feedback loop) -->
+  <path d="M540,330 C490,330 490,330 440,330 C420,330 420,360 420,380 C420,400 260,380 260,340" stroke="#FFD700" stroke-width="1.2" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow-yellow)"/>
+
+  <!-- SERVICE 03: GitHub PR Creator -->
+  <rect x="30" y="424" width="220" height="90" rx="6" fill="#0d1117" stroke="#00E5A0" stroke-width="2"/>
+  <text x="140" y="441" fill="#00E5A0" font-size="8" text-anchor="middle" letter-spacing="2">SERVICE 03</text>
+  <text x="140" y="457" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">GitHub PR Creator</text>
+  <text x="140" y="474" fill="#aaa" font-size="9" text-anchor="middle">create branch · commit files</text>
+  <text x="140" y="488" fill="#aaa" font-size="9" text-anchor="middle">open pull request</text>
+
+  <!-- Arrow: Service 03 → Service 04 with PR URL label -->
+  <line x1="250" y1="469" x2="430" y2="469" stroke="#B388FF" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <text x="330" y="462" fill="#B388FF" font-size="8" text-anchor="middle">PR URL</text>
+
+  <!-- SERVICE 04: Notifier -->
+  <rect x="432" y="424" width="220" height="90" rx="6" fill="#0d1117" stroke="#B388FF" stroke-width="2"/>
+  <text x="542" y="441" fill="#B388FF" font-size="8" text-anchor="middle" letter-spacing="2">SERVICE 04</text>
+  <text x="542" y="457" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">Notifier</text>
+  <text x="542" y="474" fill="#aaa" font-size="9" text-anchor="middle">Jira comment · Slack notification</text>
+  <text x="542" y="488" fill="#aaa" font-size="9" text-anchor="middle">ticket → In Progress · first time only</text>
+
+  <!-- External systems row -->
+  <!-- GitHub Repo -->
+  <rect x="30" y="560" width="175" height="54" rx="4" fill="#0a1a12" stroke="#00E5A0" stroke-width="1"/>
+  <text x="117" y="578" fill="#00E5A0" font-size="8" text-anchor="middle" letter-spacing="2" font-weight="700">GITHUB REPO</text>
+  <text x="117" y="594" fill="#555" font-size="8" text-anchor="middle">branch · PR</text>
+
+  <!-- Jira Cloud -->
+  <rect x="225" y="560" width="175" height="54" rx="4" fill="#0d1020" stroke="#4C9AFF" stroke-width="1"/>
+  <text x="312" y="578" fill="#4C9AFF" font-size="8" text-anchor="middle" letter-spacing="2" font-weight="700">JIRA CLOUD</text>
+  <text x="312" y="594" fill="#555" font-size="8" text-anchor="middle">comment · status</text>
+
+  <!-- Slack Channel -->
+  <rect x="420" y="560" width="175" height="54" rx="4" fill="#1a1208" stroke="#FFD700" stroke-width="1"/>
+  <text x="507" y="578" fill="#FFD700" font-size="8" text-anchor="middle" letter-spacing="2" font-weight="700">SLACK CHANNEL</text>
+  <text x="507" y="594" fill="#555" font-size="8" text-anchor="middle">PR notification</text>
+
+  <!-- Arrows to external systems -->
+  <line x1="140" y1="514" x2="117" y2="558" stroke="#00E5A0" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="490" y1="514" x2="340" y2="558" stroke="#4C9AFF" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="542" y1="514" x2="507" y2="558" stroke="#FFD700" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- PR Review Loop -->
+  <text x="280" y="642" fill="#555" font-size="7.5" text-anchor="middle">— reviewer adds PR comments · POST /webhook/github —</text>
+
+  <rect x="175" y="652" width="360" height="56" rx="6" fill="#0d1117" stroke="#00E5A0" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="355" y="670" fill="#00E5A0" font-size="8" text-anchor="middle" letter-spacing="2">PR REVIEW LOOP</text>
+  <text x="355" y="686" fill="#fff" font-size="10.5" text-anchor="middle" font-weight="600">reads comments · re-generates · Claude</text>
+  <text x="355" y="700" fill="#aaa" font-size="8.5" text-anchor="middle">commits to same branch · no Slack · no Jira</text>
+
+  <!-- Arrow: PR Review Loop back to Service 01 (left side loop) -->
+  <path d="M175,680 C60,680 20,680 20,380 C20,330 30,310 30,310" stroke="#00E5A0" stroke-width="1.2" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Footer notes -->
+  <text x="430" y="728" fill="#333" font-size="7.5" text-anchor="middle">TicketRecord { ticket_id · title · description · assignee · classification · reason · status · rag_context · created_at }</text>
+  <text x="430" y="740" fill="#333" font-size="7.5" text-anchor="middle">Orchestration: procedural pipeline · branching · background threads via ThreadPoolExecutor · plain Python services</text>
+</svg>

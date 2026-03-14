@@ -401,32 +401,37 @@ const PROJECT_DATA = {
     ],
     impact: ['Zero developer code written end-to-end', 'Jira ticket → mergeable GitHub PR autonomously', 'Multi-repo routing via Jira labels'],
     tech: ['FastAPI', 'Claude (Anthropic)', 'GitHub REST API', 'Jira REST API', 'SQLite', 'SQLAlchemy', 'Python 3.14', 'uvicorn'],
+    diagram: 'aea-architecture.svg',
   },
   'ticket-deflection': {
     icon: 'fa-ticket',
     internal: true,
     title: 'AI Ticket Deflection System',
-    problem: 'Engineering teams were overwhelmed by high support ticket volume, with most requests being repetitive and resolvable without human intervention — but no automated triage or resolution layer existed.',
+    problem: 'An internal support portal serving 40+ component areas (AWS, Tempo, PE, Jira, and more) was overwhelmed by high ticket volume. Most self-service requests could be resolved without human intervention, but there was no automated triage or resolution layer — every ticket landed with the support team regardless.',
     solution: [
-      'Built an LLM-powered classification layer using LangChain and embeddings to route tickets into self-service vs. admin-required buckets automatically',
-      'Integrated MCP workflows to resolve common requests in-place and deliver AI-generated answers directly in Slack without creating a ticket',
-      'Implemented duplicate detection to collapse redundant submissions before they reached the engineering queue',
+      'Built an LLM-powered normalisation layer that strips customer-specific details (account numbers, owner names, etc.) from each request before classification — converting "please provide access to AWS account AW786" into a generic "aws account access requested"',
+      'Classified normalised requests using a HuggingFace embeddings model with a RAG approach: each of the 40 components has 100 labelled admin-intervention samples and 100 self-service samples; the model picks the closest match above a confidence threshold of 75',
+      'For admin requests, the system automatically creates a Jira support ticket and routes it to the support team with full context — no manual triage needed',
+      'For self-service requests, an MCP Jira tool runs 10–20 iterations with different JQL queries to find the top 3–4 semantically similar resolved tickets; an LLM reads their comments (wiki links, redirects, how-to steps) to synthesise a final answer delivered directly to the user',
     ],
-    impact: ['40% support volume automated', '15+ engineering hours saved/week', 'Duplicate tickets eliminated'],
-    tech: ['LangChain', 'MCP', 'Python', 'Embeddings', 'FastAPI'],
+    impact: ['40% support volume automated', '15+ engineering hours saved/week', 'Duplicate & self-service tickets eliminated'],
+    tech: ['HuggingFace', 'RAG', 'Embeddings', 'MCP', 'Jira API', 'LangChain', 'Python', 'FastAPI'],
+    diagram: 'ticket-deflection-architecture.svg',
   },
   'text-to-sql': {
     icon: 'fa-code',
     internal: true,
     title: 'Text-to-SQL Engine',
-    problem: 'Analysts needed to query complex multi-table databases without SQL expertise. Baseline LLM prompts were expensive, token-heavy, and inaccurate on joins across large schemas.',
+    problem: 'Analysts needed to query complex Teradata databases without SQL expertise, but baseline LLM prompts were expensive and inaccurate — passing full schemas drove up token costs and confused the model with irrelevant tables.',
     solution: [
-      'Designed a schema chunking strategy that feeds only contextually relevant table definitions to the LLM, eliminating noise from full schema dumps',
-      'Engineered prompt templates with few-shot examples tuned specifically for complex join patterns and aggregation queries',
-      'Added a post-generation validation layer that checks SQL syntax and retries with corrected context on failure',
+      'Built a RAG-powered intent detection layer that identifies the request type and selects only the relevant tables from the knowledge base — matching the query pattern to pre-indexed request samples without exposing the full schema',
+      'Implemented a schema chunking strategy that fetches and passes only selected table schemas in chunks, eliminating noise from full schema dumps and reducing LLM token consumption by 35%',
+      'Engineered a Teradata-specific SQL generation prompt with enforced syntax rules (QUALIFY, TOP N, CAST differences) and few-shot examples tuned for complex join patterns and aggregations',
+      'Added an EXPLAIN keyword validation layer that runs the generated SQL through Teradata\'s query planner before execution — catching syntax errors without reading any data, with automatic regeneration on failure',
     ],
-    impact: ['35% reduction in LLM token consumption', 'Higher accuracy on multi-table joins', 'Self-serve data access for non-technical stakeholders'],
-    tech: ['Python', 'LLM', 'SQL', 'Prompt Engineering', 'FastAPI'],
+    impact: ['35% reduction in LLM token consumption', 'Self-serve data access for non-technical users', 'Higher accuracy on multi-table joins via RAG intent detection'],
+    tech: ['Python', 'LLM', 'RAG', 'Teradata SQL', 'Prompt Engineering', 'FastAPI', 'Embeddings'],
+    diagram: 'text-to-sql-architecture.svg',
   },
   'ai-agents': {
     icon: 'fa-robot',
@@ -531,6 +536,14 @@ const PROJECT_DATA = {
 
     const techEl = document.getElementById('modal-tech');
     techEl.innerHTML = data.tech.map(t => `<span class="tag">${t}</span>`).join('');
+
+    const diagramSection = document.getElementById('modal-diagram-section');
+    if (data.diagram) {
+      document.getElementById('modal-diagram').src = data.diagram;
+      diagramSection.style.display = '';
+    } else {
+      diagramSection.style.display = 'none';
+    }
 
     overlay.removeAttribute('hidden');
     requestAnimationFrame(() => overlay.classList.add('open'));
