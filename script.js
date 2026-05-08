@@ -385,10 +385,44 @@ const submitBtn  = document.getElementById('submit-btn');
    Full problem / solution / impact breakdown
 ───────────────────────────────────────────── */
 const PROJECT_DATA = {
+  'arc': {
+    icon: 'fa-wand-magic-sparkles',
+    internal: true,
+    badgeText: 'Internal &middot; Teradata &middot; In Progress',
+    title: 'ARC (Autonomous Remediation Code-fix) Agent',
+    problem: 'Engineering teams spend hours manually diagnosing Jira bug tickets, reading code, writing fixes, creating PRs, and waiting for reviews. Most of this is repetitive — especially for well-scoped tickets with clear stack traces or error descriptions. The earlier AEA prototype proved the concept; ARC is the production-grade evolution built for Teradata\'s multi-language codebase.',
+    solution: [
+      'Jira webhooks trigger the pipeline automatically — the agent classifies the ticket, extracts error details, identifies affected files, and determines if it\'s a candidate for autonomous remediation',
+      'Past fixes are embedded and stored in PostgreSQL + pgvector; the agent retrieves similar historical resolutions via RAG to guide the current fix — learning from what worked before',
+      'Shallow-clones the target repo and performs static analysis using Tree-sitter AST parsing across Python, Java, Groovy, and YAML files — extracts every symbol (class, function), import statement, and qualified method call to build a full dependency graph with 600+ edges',
+      'Assembles context in tiers instead of dumping the full repo into the LLM: target files → full source; direct dependencies → full source; direct dependents → signatures only; transitive connections → file names only — reducing token usage by ~60%',
+      'The fix is committed to a branch and a GitHub PR is opened automatically; a CI sidecar runs the test suite — if tests fail, failure logs are fed back to the LLM for a self-healing retry loop across multiple iterations until tests pass and the PR auto-merges (L3 in active development)',
+    ],
+    impact: ['700+ file repos parsed in <30s', '~60% token reduction via tiered context', 'Language-agnostic AST plugin model', 'Self-healing CI retry loop (in progress)'],
+    tech: ['Python', 'FastAPI', 'LangChain', 'LangGraph', 'Tree-sitter', 'PostgreSQL', 'pgvector', 'Docker', 'Kubernetes', 'GitHub API', 'Jira API', 'sentence-transformers'],
+    diagram: 'arc-architecture.svg',
+  },
+  'ai-migration': {
+    icon: 'fa-database',
+    internal: false,
+    badgeText: 'Nexyom &middot; In Progress',
+    badgeClass: 'badge--consultancy',
+    title: 'AI Migration Studio',
+    problem: 'Migrating data between incompatible platforms (e.g., Cherwell → ServiceNow, PostgreSQL → Snowflake, Teradata → Snowflake) requires manual schema discovery, field mapping, and artifact generation — a tedious, error-prone process that doesn\u2019t scale when every source/target pair demands a new migration playbook.',
+    solution: [
+      'Designing a multi-agent pipeline using LangGraph where specialized AI agents handle each migration stage — discovery, schema analysis, field mapping, conversion, validation, and deployment artifact generation',
+      'Building a pluggable adapter architecture supporting multiple source/target dialects — currently focused on Cherwell → ServiceNow incident ticket migration, with PostgreSQL → Snowflake and Teradata adapters planned',
+      'Engineering a hybrid deterministic + LLM approach: YAML rulebooks handle standard type/field mappings reliably, LLM tool-calling resolves ambiguous edge cases, with graceful degradation to heuristic mode when LLM is unavailable',
+      'Building a real-time agent dashboard in Next.js 14 streaming live agent reasoning traces via WebSocket, with agents displayed as business personas for stakeholder transparency',
+    ],
+    impact: ['Multi-agent migration pipeline', 'Pluggable multi-dialect adapters', 'Hybrid deterministic + LLM architecture', 'Real-time agent dashboard'],
+    tech: ['LangGraph', 'Next.js 14', 'React 18', 'TypeScript', 'FastAPI', 'Python', 'sqlglot', 'LiteLLM', 'WebSocket', 'Docker', 'ServiceNow API', 'TailwindCSS'],
+    diagram: 'ai-migration-architecture.svg',
+  },
   'aea': {
     icon: 'fa-code-pull-request',
     internal: false,
-    badgeText: 'Personal &middot; In Progress',
+    badgeText: 'Personal &middot; Completed',
     repoUrl: 'https://github.com/Anxs-11/autonomous-engineering-agent',
     title: 'Autonomous Engineering Agent (AEA)',
     problem: 'Every Jira ticket describing a feature or bug fix requires a developer to manually read the ticket, understand the codebase, write the code, and open a PR — a high-friction loop that is almost entirely automatable with the right AI pipeline.',
@@ -499,13 +533,18 @@ const PROJECT_DATA = {
     document.getElementById('modal-icon').className = `fa-solid ${data.icon}`;
     document.getElementById('modal-title').textContent = data.title;
     const badgeEl = document.getElementById('modal-badge');
-    if (data.internal) {
+    if (data.internal && !data.badgeText) {
       badgeEl.className = 'badge--internal';
       badgeEl.innerHTML = '<i class="fa-solid fa-lock" aria-hidden="true"></i> Internal &middot; Teradata';
       badgeEl.style.display = '';
+    } else if (data.internal && data.badgeText) {
+      badgeEl.className = 'badge--internal';
+      badgeEl.innerHTML = `<i class="fa-solid fa-lock" aria-hidden="true"></i> ${data.badgeText}`;
+      badgeEl.style.display = '';
     } else if (data.badgeText) {
-      badgeEl.className = 'badge--personal';
-      badgeEl.innerHTML = `<i class="fa-solid fa-flask" aria-hidden="true"></i> ${data.badgeText}`;
+      badgeEl.className = data.badgeClass || 'badge--personal';
+      const icon = data.badgeClass === 'badge--consultancy' ? 'fa-briefcase' : 'fa-flask';
+      badgeEl.innerHTML = `<i class="fa-solid ${icon}" aria-hidden="true"></i> ${data.badgeText}`;
       badgeEl.style.display = '';
     } else {
       badgeEl.style.display = 'none';

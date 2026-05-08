@@ -707,8 +707,12 @@ ul { list-style: none; }
 
 .skills__categories {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .skills__categories { grid-template-columns: 1fr; }
 }
 
 .skill-group {
@@ -1340,6 +1344,21 @@ ul { list-style: none; }
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ===== CONSULTANCY PROJECT BADGE ===== */
+.badge--consultancy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  background: rgba(66, 165, 245, 0.1);
+  border: 1px solid rgba(66, 165, 245, 0.3);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #42A5F5;
   white-space: nowrap;
 }
 
